@@ -12,7 +12,13 @@ class TransactionsController < ApplicationController
     def update
         transaction = find_params
         transaction.update!(edit_params)
-        render json: transaction, status: :updated
+        render json: transaction, status: :accepted
+    end
+
+    # Get all transactions
+    def index
+        transactions = Transaction.all
+        render json: transactions, status: :ok
     end
 
     private
@@ -34,7 +40,7 @@ class TransactionsController < ApplicationController
 
     # Params for editing a transaction
     def edit_params
-        params.permit(:status)
+        params.require(:transaction).permit(:status)
     end
 
 end
