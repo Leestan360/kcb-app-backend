@@ -6,8 +6,10 @@ class Transaction < ApplicationRecord
   validates :status, presence: true
   validates :transactionType, presence: true
 
+  enum :status, [ :sent, :pending, :completed, :reversed]
+
   def transact
-    
+
   end
   
 end

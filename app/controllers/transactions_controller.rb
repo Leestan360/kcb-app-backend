@@ -1,6 +1,7 @@
 class TransactionsController < ApplicationController
 
     rescue_from ActiveRecord::RecordNotUnique, with: :render_not_unique_entity_response
+    rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
 
     # Create a new transaction
     def create
@@ -19,6 +20,12 @@ class TransactionsController < ApplicationController
     def index
         transactions = Transaction.all
         render json: transactions, status: :ok
+    end
+
+    # Get one transaction by ID
+    def show
+        transaction = find_params
+        render json: transaction, status: :ok
     end
 
     private
@@ -41,6 +48,11 @@ class TransactionsController < ApplicationController
     # Params for editing a transaction
     def edit_params
         params.require(:transaction).permit(:status)
+    end
+
+    # Render not found exception
+    def render_not_found
+        render json: { errors: ["transaction with the id not found!"] }, status: :not_found
     end
 
 end
