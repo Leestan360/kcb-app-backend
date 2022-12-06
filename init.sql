@@ -1,0 +1,1 @@
+CREATE USER kcb_app_backend SUPERUSER;
