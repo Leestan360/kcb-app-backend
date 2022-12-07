@@ -52,7 +52,7 @@ class TransactionsController < ApplicationController
 
     # Render not found exception
     def render_not_found
-        render json: { errors: ["transaction with the id not found!"] }, status: :not_found
+        render json: { errors: ["transaction not found!"] }, status: :not_found
     end
 
 end
