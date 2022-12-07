@@ -7,6 +7,11 @@ class DevicesController < ApplicationController
         render json: device, status: :created
     end
 
+    def index
+        devices = Device.all
+        render json: devices, status: :ok
+    end
+
     private
 
     def device_params

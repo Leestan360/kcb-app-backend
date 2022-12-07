@@ -5,6 +5,11 @@ class AccountsController < ApplicationController
         render json: account, status: :created
     end
 
+    def index
+        accounts = Account.all
+        render json: accounts, status: :ok
+    end
+
     private
 
     def account_params
