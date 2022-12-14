@@ -10,10 +10,24 @@ class AccountsController < ApplicationController
         render json: accounts, status: :ok
     end
 
+    # def update
+    #     account = find_params
+    #     account.withdraw_or_withdraw
+    #     render json: account, status: :accepted
+    # end
+
     private
 
     def account_params
         params.require(:account).permit(:accountNo, :lastKnownBalance, :accountType, :user_id)
+    end
+
+    def find_params 
+        Account.find(params[:id])
+    end
+
+    def edit_params
+        params.require(:account).permit(:lastKnownBalance)
     end
 
 end

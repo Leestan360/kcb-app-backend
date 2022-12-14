@@ -4,9 +4,16 @@ class TransactionsController < ApplicationController
     rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
 
     # Create a new transaction
+    # def create
+    #     transaction = Transaction.create!(transaction_params)
+    #     render json: transaction, status: :created
+    # end
+
     def create
-        transaction = Transaction.create!(transaction_params)
-        render json: transaction, status: :created
+        account = Account.find(params[:account_id])
+        @transaction = account.transactions.create(transaction_params)
+        account.update_with_transaction(@transaction)
+        render json: @transaction, status: :created
     end
 
     # Update transaction by ID
