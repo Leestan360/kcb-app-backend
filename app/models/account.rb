@@ -12,6 +12,8 @@ class Account < ApplicationRecord
       self.lastKnownBalance -= transaction.amount
     elsif transaction.status == "received"
       self.lastKnownBalance += transaction.amount
+    elsif transaction.status == "received"
+      self.lastKnownBalance += transaction.amount
     end
     save
   end

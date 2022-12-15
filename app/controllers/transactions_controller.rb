@@ -3,20 +3,21 @@ class TransactionsController < ApplicationController
     rescue_from ActiveRecord::RecordNotUnique, with: :render_not_unique_entity_response
     rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
 
-    # Create a new transaction
-    # def create
-    #     transaction = Transaction.create!(transaction_params)
-    #     render json: transaction, status: :created
-    # end
-
+    # Create a new transaction associated with an acoount
+    # The transaction only goes through if the account lastKnownBalance will not go below 0
     def create
         account = Account.find(params[:account_id])
         @transaction = account.transactions.create(transaction_params)
-        account.update_with_transaction(@transaction)
-        render json: @transaction, status: :created
+        if account.lastKnownBalance >= @transaction.amount
+            account.update_with_transaction(@transaction)
+            render json: @transaction, status: :created
+        else
+            render json: { errors: ["insufficient balance"] }, status: :unprocessable_entity
+        end
     end
 
     # Update transaction by ID
+    # The status is updated
     def update
         transaction = find_params
         transaction.update!(edit_params)
