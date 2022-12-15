@@ -1,8 +1,5 @@
 class TransactionsController < ApplicationController
 
-    rescue_from ActiveRecord::RecordNotUnique, with: :render_not_unique_entity_response
-    rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
-
     # Create a new transaction associated with an acoount
     # The transaction only goes through if the account lastKnownBalance will not go below 0
     def create
@@ -43,11 +40,6 @@ class TransactionsController < ApplicationController
         params.require(:transaction).permit(:uniqueReference, :account_number, :amount, :status, :transactionType, :account_id)
     end
 
-    # Render not unique response from the database
-    def render_not_unique_entity_response(exception)
-        render json: { errors: ["unique reference already exists"] }, status: :unprocessable_entity
-    end
-
     # Find transaction by ID
     def find_params 
         Transaction.find(params[:id])
@@ -56,11 +48,6 @@ class TransactionsController < ApplicationController
     # Params for editing a transaction
     def edit_params
         params.require(:transaction).permit(:status)
-    end
-
-    # Render not found exception
-    def render_not_found
-        render json: { errors: ["transaction not found!"] }, status: :not_found
     end
 
 end
