@@ -40,7 +40,7 @@ class TransactionsController < ApplicationController
 
     # Params for creating a new transaction
     def transaction_params
-        params.require(:transaction).permit(:uniqueReference, :amount, :status, :transactionType, :account_id)
+        params.require(:transaction).permit(:uniqueReference, :account_number, :amount, :status, :transactionType, :account_id)
     end
 
     # Render not unique response from the database

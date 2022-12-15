@@ -1,7 +1,8 @@
 class CreateTransactions < ActiveRecord::Migration[7.0]
   def change
     create_table :transactions do |t|
-      t.string :uniqueReference, null: false
+      t.string :uniqueReference, null: false, length: 10
+      t.bigint :account_number, null: false, length: 8
       t.integer :amount, null: false
       t.integer :status, default: 0, null: false
       t.integer :transactionType, default: 0, null: false
