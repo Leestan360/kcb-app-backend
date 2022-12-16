@@ -37,7 +37,7 @@ class ApplicationController < ActionController::Base
     end
   
     def authorize
-      render json: { message: 'Please sign in' }, status: :unauthorized unless logged_in?
+      render json: { message: "You haven't signed in" }, status: :unauthorized unless logged_in?
     end
     
     private
