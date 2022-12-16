@@ -44,6 +44,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_01_070537) do
 
   create_table "transactions", force: :cascade do |t|
     t.string "uniqueReference", null: false
+    t.bigint "account_number", null: false
     t.integer "amount", null: false
     t.integer "status", default: 0, null: false
     t.integer "transactionType", default: 0, null: false
