@@ -5,11 +5,12 @@ class TransactionsController < ApplicationController
     def create
         account = Account.find(params[:account_id])
         @transaction = account.transactions.create(transaction_params)
-        if account.lastKnownBalance >= @transaction.amount
+        if (account.lastKnownBalance >= @transaction.amount && (@transaction.status == "sent" or @transaction.status == "reversed")) or 
+            (account.lastKnownBalance <= @transaction.amount && (@transaction.status == "received"))
             account.update_with_transaction(@transaction)
             render json: @transaction, status: :created
         else
-            render json: { errors: ["insufficient balance"] }, status: :unprocessable_entity
+            render json: { errors: ["Insufficient balance!"] }, status: :unprocessable_entity
         end
     end
 
