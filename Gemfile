@@ -75,3 +75,5 @@ group :test do
 end
 
 gem "jwt", "~> 2.5"
+
+gem "rack-cors", "~> 1.1"
