@@ -14,7 +14,7 @@ class UsersController < ApplicationController
         # else
         #   render json: { error: 'failed to create user' }, status: :unprocessable_entity
         # end
-      end
+    end
 
     def index
         users = User.all
@@ -25,7 +25,7 @@ class UsersController < ApplicationController
     private
 
     def user_params
-        params.permit(:firstName, :lastName, :email, :role_id, :password, :password_confirmation)
+        params.require(:user).permit(:firstName, :lastName, :email, :role_id, :password, :password_confirmation)
     end
 
 end

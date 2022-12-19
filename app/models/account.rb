@@ -1,8 +1,11 @@
 class Account < ApplicationRecord
+  require 'securerandom'
   belongs_to :user
   has_many :transactions
 
-  validates :accountNo, presence: true, length: { is: 8 }, uniqueness: true
+  before_create :set_account_number
+
+  validates :accountNo, uniqueness: true
   validates :lastKnownBalance, presence: true, numericality: { greater_than_or_equal_to: 0 }
   validates :accountType, presence: true
 
@@ -26,6 +29,12 @@ class Account < ApplicationRecord
     #   self.lastKnownBalance -= transaction.amount
     end
     save
+  end
+
+  private
+
+  def set_account_number
+    self.accountNo = SecureRandom.rand(10_000_000..99_999_999)
   end
 
 end

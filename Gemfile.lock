@@ -175,6 +175,7 @@ GEM
       io-console (~> 0.5)
     rexml (3.2.5)
     rubyzip (2.3.2)
+    securerandom (0.2.2)
     selenium-webdriver (4.6.1)
       childprocess (>= 0.5, < 5.0)
       rexml (~> 3.2, >= 3.2.5)
@@ -230,6 +231,7 @@ DEPENDENCIES
   puma (~> 5.0)
   rack-cors (~> 1.1)
   rails (~> 7.0.4)
+  securerandom (~> 0.2.2)
   selenium-webdriver
   sprockets-rails
   stimulus-rails
