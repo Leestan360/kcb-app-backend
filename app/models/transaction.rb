@@ -3,6 +3,7 @@ class Transaction < ApplicationRecord
 
   before_create :set_unique_reference
 
+  validates :uniqueReference, uniqueness: true
   validates :account_number, presence: true, length: {is: 8}
   validates :amount, presence: true
   validates :status, presence: true

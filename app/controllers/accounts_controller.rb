@@ -10,6 +10,11 @@ class AccountsController < ApplicationController
         render json: accounts, status: :ok
     end
 
+    def show
+        account = find_params
+        render json: account, status: :ok
+    end
+
     # def update
     #     account = find_params
     #     account.withdraw_or_withdraw
