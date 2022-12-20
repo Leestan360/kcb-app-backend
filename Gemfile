@@ -73,3 +73,9 @@ group :test do
   gem "selenium-webdriver"
   gem "webdrivers"
 end
+
+gem "jwt", "~> 2.5"
+
+gem "rack-cors", "~> 1.1"
+
+gem "securerandom", "~> 0.2.2"

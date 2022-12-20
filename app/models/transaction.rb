@@ -8,5 +8,11 @@ class Transaction < ApplicationRecord
   validates :transactionType, presence: true
 
   enum :status, [ :sent, :received, :reversed, :pending, :completed]
-  
+
+  private
+
+  def set_unique_reference
+    
+  end
+
 end
