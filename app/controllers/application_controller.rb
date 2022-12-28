@@ -4,9 +4,10 @@ class ApplicationController < ActionController::Base
 
     rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity_response
 
-    # before_action :authorize
+    before_action :authorize
 
-    def encode_token(payload)
+    def encode_token(payload, exp: 30.minutes.from_now)
+      payload[:exp] = exp.to_i
       JWT.encode(payload, 'my_s3cr3t')
     end
   
